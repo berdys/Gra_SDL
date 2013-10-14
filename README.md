@@ -12,3 +12,6 @@ This is a regular paragraph.
 </table>
 
 This is another regular paragraph.
+
+
+~~NIE MA SKRESLANIA TEKSTU!!~~
