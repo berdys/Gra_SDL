@@ -34,6 +34,9 @@ int main(){
 
   device = alcOpenDevice(NULL);
   if (!device){
-  
-  }
+        ALCenum error;
+
+        error = alGetError();
+        //if (error != AL_NO_ERROR)
+        //}
 }
