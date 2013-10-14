@@ -1,17 +1,17 @@
-Gra_SDL
+#Gra_SDL
 =======
-
-Gra na zaliczenie
-
-This is a regular paragraph.
-
 <table>
     <tr>
-        <td>Foo</td>
+        <td>ZASADY</td>
     </tr>
 </table>
 
-This is another regular paragraph.
+W tym pliku piszemy co zrobiliśmy, kiedy i gdzie.<br/>
+Nie kasujemy poprzednich wpisów. Jedynie dodajemy nowe. 
 
+----------------
+###14.10.2013
+Dodałem ten wpis
 
-~~NIE MA SKRESLANIA TEKSTU!!~~
+-----------------
+
