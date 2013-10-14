@@ -37,6 +37,7 @@ int main(){
         ALCenum error;
 
         error = alGetError();
-        //if (error != AL_NO_ERROR)
-        //}
+        if (error == AL_NO_ERROR)
+  
+        }
 }
