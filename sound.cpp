@@ -10,25 +10,6 @@
 
 using namespace std;
 
-/*
-NIE POTRZEBNE
-
-static void list_audio_devices(const ALCchar *devices)
-{
-        const ALCchar *device = devices, *next = devices + 1;
-        size_t len = 0;
-
-        cout<<"Devices list:";
-        while (device && *device != '\0' && next && *next != '\0') {
-                cout<< device;
-                len = strlen(device);
-                device += (len + 1);
-                next += (len + 2);
-        }
-        cout<<endl;
-}
-*/
-
 
 ////Sprawdzenie błędów
 static void check_errors(const char* a=0){
