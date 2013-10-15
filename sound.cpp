@@ -20,6 +20,7 @@ static void check_errors(const char* a=0){
 }
 
 ////Ustalanie ilosci kanałów i próbkowania?????
+/// TO mozna na sztywno przypisac ale na podstawie posiadanych plikow .wav
 static inline ALenum to_al_format(short channels, short samples)
 {
         bool stereo = (channels > 1);
