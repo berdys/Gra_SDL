@@ -1,22 +1,20 @@
 #include <iostream>
 #include <cstdlib>
 
-////From libaudio
-#include <audio/wave.h>
+#include "sound.h"
 
-/// From OpenAL
-#include <AL/al.h>
-#include <AL/alc.h>
 
 using namespace std;
 
 
+
 ////Sprawdzenie błędów
-static void check_errors(const char* a=0){
+static void check_errors(const char* a){
 	ALCenum error=alGetError();
         if (error != AL_NO_ERROR){
   		cout<<a<<endl;
         }
+        
 }
 
 ////Ustalanie ilosci kanałów i próbkowania?????
@@ -39,29 +37,11 @@ static inline ALenum to_al_format(short channels, short samples)
         default:
                 return -1;
         }
+        
 }
 
-int main(){
-  
-  ALboolean enumeration;
-  ALCdevice *device;
-  ALfloat listenerOri[] = { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f };
-  ALuint source;
-  ALuint buffer;
-  WaveInfo *wave;
-  void *bufferData;
-  int ret;
-  ALint source_state;
-  ALCcontext *context;
-  ALboolean loop = AL_FALSE;
-
-  enumeration = alcIsExtensionPresent(NULL, "ALC_ENUMERATION_EXT");
-  if (enumeration == AL_FALSE){
-  	   cout<<"ERROR"<<endl;	
-        return 1;
-  }
-
-  device = alcOpenDevice(alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER));
+void init(){
+ device = alcOpenDevice(alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER));
   if (!device){
 	check_errors("Wybranie urządzenia");
   }
@@ -85,33 +65,35 @@ int main(){
    alSource3f(source, AL_VELOCITY, 0, 0, 0);
    alSourcei(source, AL_LOOPING, AL_FALSE);
    check_errors("Dodanie źródeł");
-  
+}
 
+void play(int a){
+   
    alGenBuffers((ALuint)1, &buffer);
    check_errors("Generowanie bufora");
    
    wave = WaveOpenFileForReading("test.wav");
    if (!wave) {
         cout<< "Nie znaleziono pliku dzwiękowego"<<endl;
-        return -1;
+        return;
    }
 
    ret = WaveSeekFile(0, wave);
    if (ret) {
        cout<<"Nie moze przeszukac pliku"<<endl;
-       return -1;
+       return;
    }
 
    bufferData = malloc(wave->dataSize);
    if (!bufferData) {
        cout<<"Problem z alokacją pamięci"<<endl;
-       return -1;
+       return;
    }
 
    ret = WaveReadFile((char*)bufferData, wave->dataSize, wave);
    if (ret != wave->dataSize) {
        cout<<"Bufor za krótki chyba"<<endl;
-       return -1;
+       return;
    }
    alBufferData(buffer, to_al_format(wave->channels, wave->bitsPerSample),bufferData, wave->dataSize, wave->sampleRate);
    check_errors("Kopiowanie do bufora");
@@ -128,12 +110,16 @@ int main(){
         alGetSourcei(source, AL_SOURCE_STATE, &source_state);
         check_errors("Pętla czekajaca na koniec odtworzenia");
    }
+   
+}
+
+void clean(){
+   
    alDeleteSources(1, &source);
    alDeleteBuffers(1, &buffer);
    device = alcGetContextsDevice(context);
    alcMakeContextCurrent(NULL);
    alcDestroyContext(context);
    alcCloseDevice(device);
-       
-   return 0;       
+
 }
