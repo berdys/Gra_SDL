@@ -7,7 +7,6 @@
 using namespace std;
 
 
-
 ////Sprawdzenie błędów
 static void check_errors(const char* a){
 	ALCenum error=alGetError();
@@ -19,8 +18,8 @@ static void check_errors(const char* a){
 
 ////Ustalanie ilosci kanałów i próbkowania?????
 /// TO mozna na sztywno przypisac ale na podstawie posiadanych plikow .wav
-static inline ALenum to_al_format(short channels, short samples)
-{
+static inline ALenum to_al_format(short channels, short samples){
+	
         bool stereo = (channels > 1);
 
         switch (samples) {
@@ -41,7 +40,8 @@ static inline ALenum to_al_format(short channels, short samples)
 }
 
 void init(){
- device = alcOpenDevice(alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER));
+	
+  device = alcOpenDevice(alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER));
   if (!device){
 	check_errors("Wybranie urządzenia");
   }
@@ -51,7 +51,7 @@ void init(){
   context = alcCreateContext(device, NULL);
   if (!alcMakeContextCurrent(context)){
         check_errors("Tworzenie Contex'u");
-   }
+  }
    alListener3f(AL_POSITION, 0, 0, 1.0f);
    alListener3f(AL_VELOCITY, 0, 0, 0);
    alListenerfv(AL_ORIENTATION, listenerOri);
@@ -65,9 +65,7 @@ void init(){
    alSource3f(source, AL_VELOCITY, 0, 0, 0);
    alSourcei(source, AL_LOOPING, AL_FALSE);
    check_errors("Dodanie źródeł");
-}
-
-void play(int a){
+   
    
    alGenBuffers((ALuint)1, &buffer);
    check_errors("Generowanie bufora");
@@ -100,6 +98,9 @@ void play(int a){
    
    alSourcei(source, AL_BUFFER, buffer);
    check_errors("???");
+}
+
+void play(int a){
    
    alSourcePlay(source);
    check_errors("Odtworzenie");
