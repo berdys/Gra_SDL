@@ -101,17 +101,32 @@ void init(){
 }
 
 void play(int a){
-   
-   alSourcePlay(source);
-   check_errors("Odtworzenie");
+   switch(a){
 
-   alGetSourcei(source, AL_SOURCE_STATE, &source_state);
-   check_errors("Pobranie stanu");
-   while (source_state == AL_PLAYING) {
-        alGetSourcei(source, AL_SOURCE_STATE, &source_state);
-        check_errors("Pętla czekajaca na koniec odtworzenia");
+	case 0:
+
+   		alSourcePlay(source);
+   		check_errors("Odtworzenie");
+
+   		alGetSourcei(source, AL_SOURCE_STATE, &source_state);
+   		check_errors("Pobranie stanu");
+   		while (source_state == AL_PLAYING) {
+        		alGetSourcei(source, AL_SOURCE_STATE, &source_state);
+        		check_errors("Pętla czekajaca na koniec odtworzenia");
+   		}
+   	break;
+   	case 1:
+   	
+   	break;
+   	
+   	case 2:
+   	
+   	break;
+   	
+   	default:
+   		cout<<"Błędne wywołanie"<<endl;
+   	;
    }
-   
 }
 
 void clean(){
