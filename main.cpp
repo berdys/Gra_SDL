@@ -1,6 +1,6 @@
 #include "main.hpp"
 #include "sound.hpp"
-// opcje do kompilowania: g++ -lBox2D -lGL -lSDL
+// opcje do kompilowania: g++ -lBox2D -lGL -lSDL -lopenal -laudio
 // nieużywane -lGLU -lglut
 
 using namespace std;
