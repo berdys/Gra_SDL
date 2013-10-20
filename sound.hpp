@@ -12,7 +12,7 @@ static void check_errors(const char* a=0);
 static inline ALenum to_al_format(short channels, short samples);
 
 static ALboolean enumeration;
-static   ALCdevice *device;
+static ALCdevice *device;
 static ALfloat listenerOri[] = { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f };
 static ALuint source;
 static ALuint buffer;
@@ -146,11 +146,6 @@ void play(int a)
 
         alGetSourcei(source, AL_SOURCE_STATE, &source_state);
         check_errors("Pobranie stanu");
-        while (source_state == AL_PLAYING)
-        {
-            alGetSourcei(source, AL_SOURCE_STATE, &source_state);
-            check_errors("Pętla czekajaca na koniec odtworzenia");
-        }
         break;
     case 1:
 
@@ -168,7 +163,12 @@ void play(int a)
 
 void clean()
 {
+    while (source_state == AL_PLAYING){
 
+        alGetSourcei(source, AL_SOURCE_STATE, &source_state);
+        check_errors("Pętla czekajaca na koniec odtworzenia");
+
+    }
     alDeleteSources(1, &source);
     alDeleteBuffers(1, &buffer);
     device = alcGetContextsDevice(context);
