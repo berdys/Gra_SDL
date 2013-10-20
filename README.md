@@ -7,7 +7,8 @@ Skasowałem stare pliki i podmieniłem je na nowe. Sound teraz jest cały w plik
 zrobić sobie "fork" na gicie, pobrać aktualny projekt do siebie na dysk, pracować !!, commitować zmiany z powrotem. Instrukcja
 jak robić forki: https://help.github.com/articles/fork-a-repo
 
-I jak piszecie newsy to najświeższy zawsze najwyżej. 
+I jak piszecie newsy to najświeższy zawsze najwyżej a pozatym pisać info w commitach, zeby bylo potem wiadomo który commit co wnosił 
+w razie jakby trzeba było cofać. 
 
 ----------------
 

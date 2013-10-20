@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1382043684 source:/home/marcin/Programowanie/Gra/Gra_SDL/main.cpp
+	"main.hpp"
+	"sound.hpp"
+
+1381667683 /home/marcin/Programowanie/Gra/Gra_SDL/main.hpp
+	<cstdlib>
+	<stdlib.h>
+	<iostream>
+	<SDL/SDL.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<Box2D/Box2D.h>
+	<stdio.h>
+
+1382042610 /home/marcin/Programowanie/Gra/Gra_SDL/sound.hpp
+	<audio/wave.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1382043996 source:/home/marcin/Programowanie/Gra/Gra_SDL/sound.cpp
+	<iostream>
+	<cstdlib>
+	"sound.hpp"
+

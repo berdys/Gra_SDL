@@ -12,7 +12,7 @@ const int WIDTH=1024;
 const int HEIGHT=480;
 
 // Metry na piksele i odwrotnie
-const float M2P=60;
+const float M2P=50;
 const float P2M=1/M2P;
 
 void initView()
