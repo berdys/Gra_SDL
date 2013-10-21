@@ -73,7 +73,7 @@ b2Body* addRect(int x, int y, int w, int h, bool dynamic=true)
     fixturedef.shape=&shape;
     fixturedef.density=1.0f;
     body->CreateFixture(&fixturedef);
-    play();
+
 
     return 0;
 }
@@ -81,8 +81,8 @@ b2Body* addRect(int x, int y, int w, int h, bool dynamic=true)
 void initWorld()
 {
     // world creation
-    b2Vec2 gravity(0.0f,8.3f);
-    world = new b2World(gravity);
+    const b2Vec2 gravity(0.0f,8.3f);
+    world = new b2World(gravity,false);
     addRect(WIDTH/2,HEIGHT-50,WIDTH,10,false);
 
 }
@@ -148,6 +148,7 @@ int main ()
                 if(event.button.button==SDL_BUTTON_LEFT)
                 {
                     addRect(event.button.x,event.button.y,10,10,true);
+                    play();
                     break;
                 }
             }
@@ -156,6 +157,7 @@ int main ()
                 if(event.button.button==SDL_BUTTON_RIGHT)
                 {
                     addRect(event.button.x,event.button.y,60,30,true);
+                    play();
                     break;
                 }
             }
