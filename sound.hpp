@@ -186,7 +186,7 @@ void play(int a)
 
     bool search=true;
     int nr=0;
-    while(search){
+    while(search&&nr<5){
         alGetSourcei(source[nr], AL_SOURCE_STATE, &source_state);
         if(source_state==AL_PLAYING){
                 nr++;
