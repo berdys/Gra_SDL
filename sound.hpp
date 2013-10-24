@@ -198,18 +198,10 @@ void play(int a)
         }
     }
 
-    //alSourcei(source[0], AL_BUFFER, buffer[a]);
-    //alSourcePlay(source[0]);
 }
 
 void clean()
 {
-   /* while (source_state == AL_PLAYING){
-
-        alGetSourcei(source, AL_SOURCE_STATE, &source_state);
-        check_errors("Pętla czekajaca na koniec odtworzenia");
-
-    }*/
     alDeleteSources(5, source);
     alDeleteBuffers(16, buffer);
     device = alcGetContextsDevice(context);
