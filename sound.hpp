@@ -11,17 +11,16 @@
 static void check_errors(const char* a=0);
 static inline ALenum to_al_format(short channels, short samples);
 
-static ALboolean enumeration;
+
 static ALCdevice *device;
 static ALfloat listenerOri[] = { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f };
 static ALuint source;
-static ALuint buffer;
+static ALuint buffer[16];
 static WaveInfo *wave;
-static void *bufferData;
+static void *bufferData,*bufferData1,*bufferData2,*bufferData3,*bufferData4,*bufferData5,*bufferData6,*bufferData7,*bufferData8,*bufferData9;
 static int ret;
 static ALint source_state;
 static ALCcontext *context;
-static ALboolean loop = AL_FALSE;
 void init();
 void play(int=0);
 void clean();
@@ -97,10 +96,11 @@ void init()
     check_errors("Dodanie źródeł");
 
 
-    alGenBuffers((ALuint)1, &buffer);
-    check_errors("Generowanie bufora");
+    alGenBuffers((ALuint)16, buffer);
+    check_errors("Generowanie buforów");
 
-    wave = WaveOpenFileForReading("./test.wav");
+
+    wave = WaveOpenFileForReading("/home/marek/Gra_SDL/sounds/buja.wav");
     if (!wave)
     {
         cout<< "Nie znaleziono pliku dzwiękowego"<<endl;
@@ -127,38 +127,53 @@ void init()
         cout<<"Bufor za krótki chyba"<<endl;
         return;
     }
-    alBufferData(buffer, to_al_format(wave->channels, wave->bitsPerSample),bufferData, wave->dataSize, wave->sampleRate);
+    alBufferData(buffer[0], to_al_format(wave->channels, wave->bitsPerSample),bufferData, wave->dataSize, wave->sampleRate);
     check_errors("Kopiowanie do bufora");
 
-    alSourcei(source, AL_BUFFER, buffer);
-    check_errors("???");
+
+    delete wave;
+    wave = WaveOpenFileForReading("/home/marek/Gra_SDL/sounds/nalewanie_piwa.wav");
+    if (!wave)
+    {
+        cout<< "Nie znaleziono pliku dzwiękowego"<<endl;
+        return;
+    }
+
+    ret = WaveSeekFile(0, wave);
+    if (ret)
+    {
+        cout<<"Nie moze przeszukac pliku"<<endl;
+        return;
+    }
+
+    bufferData1 = malloc(wave->dataSize);
+    if (!bufferData1)
+    {
+        cout<<"Problem z alokacją pamięci"<<endl;
+        return;
+    }
+
+    ret = WaveReadFile((char*)bufferData1, wave->dataSize, wave);
+    if (ret != wave->dataSize)
+    {
+        cout<<"Bufor za krótki chyba"<<endl;
+        return;
+    }
+    alBufferData(buffer[1], to_al_format(wave->channels, wave->bitsPerSample),bufferData1, wave->dataSize, wave->sampleRate);
+    check_errors("Kopiowanie do bufora");
+
+
+
+
+
+
 }
 
 void play(int a)
 {
-    switch(a)
-    {
-
-    case 0:
-
-        alSourcePlay(source);
-        check_errors("Odtworzenie");
-
-        alGetSourcei(source, AL_SOURCE_STATE, &source_state);
-        check_errors("Pobranie stanu");
-        break;
-    case 1:
-
-        break;
-
-    case 2:
-
-        break;
-
-    default:
-        cout<<"Błędne wywołanie"<<endl;
-        ;
-    }
+    //nowe źródło
+    alSourcei(source, AL_BUFFER, buffer[a]);
+    alSourcePlay(source);
 }
 
 void clean()
@@ -170,7 +185,7 @@ void clean()
 
     }
     alDeleteSources(1, &source);
-    alDeleteBuffers(1, &buffer);
+    alDeleteBuffers(1, &buffer[0]);
     device = alcGetContextsDevice(context);
     alcMakeContextCurrent(NULL);
     alcDestroyContext(context);
