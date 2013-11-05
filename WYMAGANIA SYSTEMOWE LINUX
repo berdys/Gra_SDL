@@ -1,0 +1,2 @@
+OpenGL <- dostarczany ze sterownikami do karty graficznej
+FreeGlut <- sudo apt-get install freeglut3 freeglut3-dev
