@@ -12,9 +12,8 @@ Gracz pojedynczy. (Jak straczy czasu dodanie trybu wieloosobowego)
 
 ###Sposób komunikacji wewnętrznej i zewnętrznej
 
--komunikacja wenętrzna:
--komunikacja zewnętrzna:
-  czat
+komunikacja wenętrzna i komunikacja zewnętrzna w formie czatu
+  
 -----------------
 
 
