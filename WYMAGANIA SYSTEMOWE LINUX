@@ -1,5 +1,7 @@
 Do skompilowania Box2D:
 
 OpenGL <- dostarczany ze sterownikami do karty graficznej
-FreeGlut <- sudo apt-get install freeglut3 freeglut3-dev
-Xinput.h <- sudo apt-get install libxi-dev
+OpenGL: sudo apt-get install libglu1-mesa-dev mesa-common-dev
+FreeGlut: sudo apt-get install freeglut3 freeglut3-dev
+Xinput.h: sudo apt-get install libxi-dev
+OpenAL: sudo apt-get install libopenal0a libopenal-dev
