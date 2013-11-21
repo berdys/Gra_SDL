@@ -8,6 +8,8 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 
+namespace sound{
+
 static void check_errors(const char* a=0);
 static inline ALenum to_al_format(short channels, short samples);
 
@@ -26,7 +28,7 @@ void play(int=0);
 void clean();
 
 
-using namespace std;
+
 
 
 ////Sprawdzenie błędów
@@ -35,7 +37,7 @@ static void check_errors(const char* a)
     ALCenum error=alGetError();
     if (error != AL_NO_ERROR)
     {
-        cout<<a<<endl;
+        std::cout<<a<<std::endl;
     }
 
 }
@@ -73,7 +75,7 @@ void init()
     {
         check_errors("Wybranie urządzenia");
     }
-    cout<<"Urządzenie: "<< alcGetString(device, ALC_DEVICE_SPECIFIER)<<endl;
+    std::cout<<"Urządzenie: "<< alcGetString(device, ALC_DEVICE_SPECIFIER)<<std::endl;
 
 
     context = alcCreateContext(device, NULL);
@@ -114,64 +116,193 @@ void init()
     wave = WaveOpenFileForReading("/home/marek/Gra_SDL/sounds/buja.wav");
     if (!wave)
     {
-        cout<< "Nie znaleziono pliku dzwiękowego"<<endl;
+        std::cout<< "Nie znaleziono pliku dzwiękowego"<<std::endl;
         return;
     }
 
     ret = WaveSeekFile(0, wave);
     if (ret)
     {
-        cout<<"Nie moze przeszukac pliku"<<endl;
+        std::cout<<"Nie moze przeszukac pliku"<<std::endl;
         return;
     }
 
     bufferData = malloc(wave->dataSize);
     if (!bufferData)
     {
-        cout<<"Problem z alokacją pamięci"<<endl;
+        std::cout<<"Problem z alokacją pamięci"<<std::endl;
         return;
     }
 
     ret = WaveReadFile((char*)bufferData, wave->dataSize, wave);
     if (ret != wave->dataSize)
     {
-        cout<<"Bufor za krótki chyba"<<endl;
+        std::cout<<"Bufor za krótki chyba"<<std::endl;
         return;
     }
     alBufferData(buffer[0], to_al_format(wave->channels, wave->bitsPerSample),bufferData, wave->dataSize, wave->sampleRate);
     check_errors("Kopiowanie do bufora");
 
+    //##################################################
 
     delete wave;
     wave = WaveOpenFileForReading("/home/marek/Gra_SDL/sounds/nalewanie_piwa.wav");
     if (!wave)
     {
-        cout<< "Nie znaleziono pliku dzwiękowego"<<endl;
+        std::cout<< "Nie znaleziono pliku dzwiękowego"<<std::endl;
         return;
     }
 
     ret = WaveSeekFile(0, wave);
     if (ret)
     {
-        cout<<"Nie moze przeszukac pliku"<<endl;
+        std::cout<<"Nie moze przeszukac pliku"<<std::endl;
         return;
     }
 
     bufferData1 = malloc(wave->dataSize);
     if (!bufferData1)
     {
-        cout<<"Problem z alokacją pamięci"<<endl;
+        std::cout<<"Problem z alokacją pamięci"<<std::endl;
         return;
     }
 
     ret = WaveReadFile((char*)bufferData1, wave->dataSize, wave);
     if (ret != wave->dataSize)
     {
-        cout<<"Bufor za krótki chyba"<<endl;
+        std::cout<<"Bufor za krótki chyba"<<std::endl;
         return;
     }
     alBufferData(buffer[1], to_al_format(wave->channels, wave->bitsPerSample),bufferData1, wave->dataSize, wave->sampleRate);
     check_errors("Kopiowanie do bufora");
+
+    //##################################################
+    delete wave;
+    wave = WaveOpenFileForReading("/home/marek/Gra_SDL/sounds/skok1.wav");
+    if (!wave)
+    {
+        std::cout<< "Nie znaleziono pliku dzwiękowego"<<std::endl;
+        return;
+    }
+
+    ret = WaveSeekFile(0, wave);
+    if (ret)
+    {
+        std::cout<<"Nie moze przeszukac pliku"<<std::endl;
+        return;
+    }
+
+    bufferData2 = malloc(wave->dataSize);
+    if (!bufferData2)
+    {
+        std::cout<<"Problem z alokacją pamięci"<<std::endl;
+        return;
+    }
+
+    ret = WaveReadFile((char*)bufferData2, wave->dataSize, wave);
+    if (ret != wave->dataSize)
+    {
+        std::cout<<"Bufor za krótki chyba"<<std::endl;
+        return;
+    }
+    alBufferData(buffer[2], to_al_format(wave->channels, wave->bitsPerSample),bufferData2, wave->dataSize, wave->sampleRate);
+    check_errors("Kopiowanie do bufora");
+
+
+    //##################################################
+    delete wave;
+    wave = WaveOpenFileForReading("/home/marek/Gra_SDL/sounds/skok2.wav");
+    if (!wave)
+    {
+        std::cout<< "Nie znaleziono pliku dzwiękowego"<<std::endl;
+        return;
+    }
+
+    ret = WaveSeekFile(0, wave);
+    if (ret)
+    {
+        std::cout<<"Nie moze przeszukac pliku"<<std::endl;
+        return;
+    }
+
+    bufferData3 = malloc(wave->dataSize);
+    if (!bufferData3)
+    {
+        std::cout<<"Problem z alokacją pamięci"<<std::endl;
+        return;
+    }
+
+    ret = WaveReadFile((char*)bufferData3, wave->dataSize, wave);
+    if (ret != wave->dataSize)
+    {
+        std::cout<<"Bufor za krótki chyba"<<std::endl;
+        return;
+    }
+    alBufferData(buffer[3], to_al_format(wave->channels, wave->bitsPerSample),bufferData3, wave->dataSize, wave->sampleRate);
+    check_errors("Kopiowanie do bufora");
+    //##################################################
+    delete wave;
+    wave = WaveOpenFileForReading("/home/marek/Gra_SDL/sounds/skok3.wav");
+    if (!wave)
+    {
+        std::cout<< "Nie znaleziono pliku dzwiękowego"<<std::endl;
+        return;
+    }
+
+    ret = WaveSeekFile(0, wave);
+    if (ret)
+    {
+        std::cout<<"Nie moze przeszukac pliku"<<std::endl;
+        return;
+    }
+
+    bufferData4 = malloc(wave->dataSize);
+    if (!bufferData4)
+    {
+        std::cout<<"Problem z alokacją pamięci"<<std::endl;
+        return;
+    }
+
+    ret = WaveReadFile((char*)bufferData4, wave->dataSize, wave);
+    if (ret != wave->dataSize)
+    {
+        std::cout<<"Bufor za krótki chyba"<<std::endl;
+        return;
+    }
+    alBufferData(buffer[4], to_al_format(wave->channels, wave->bitsPerSample),bufferData4, wave->dataSize, wave->sampleRate);
+    check_errors("Kopiowanie do bufora");
+    //######################################################
+    delete wave;
+    wave = WaveOpenFileForReading("/home/marek/Gra_SDL/sounds/skok4.wav");
+    if (!wave)
+    {
+        std::cout<< "Nie znaleziono pliku dzwiękowego"<<std::endl;
+        return;
+    }
+
+    ret = WaveSeekFile(0, wave);
+    if (ret)
+    {
+        std::cout<<"Nie moze przeszukac pliku"<<std::endl;
+        return;
+    }
+
+    bufferData5 = malloc(wave->dataSize);
+    if (!bufferData5)
+    {
+        std::cout<<"Problem z alokacją pamięci"<<std::endl;
+        return;
+    }
+
+    ret = WaveReadFile((char*)bufferData5, wave->dataSize, wave);
+    if (ret != wave->dataSize)
+    {
+        std::cout<<"Bufor za krótki chyba"<<std::endl;
+        return;
+    }
+    alBufferData(buffer[5], to_al_format(wave->channels, wave->bitsPerSample),bufferData5, wave->dataSize, wave->sampleRate);
+    check_errors("Kopiowanie do bufora");
+
 
 
 
@@ -184,6 +315,9 @@ void play(int a)
 {
 
 
+    if(a==3){
+        a=2+rand()%4;
+    }
     bool search=true;
     int nr=0;
     while(search&&nr<5){
@@ -210,7 +344,7 @@ void clean()
     alcCloseDevice(device);
 
 }
-
+}
 
 
 #endif // SOUND_HPP_INCLUDED
