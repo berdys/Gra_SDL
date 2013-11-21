@@ -6,3 +6,4 @@ FreeGlut: sudo apt-get install freeglut3 freeglut3-dev
 Xinput.h: sudo apt-get install libxi-dev
 OpenAL: sudo apt-get install libopenal-dev
 libaudio-dev
+SDL: sudo apt-get install libsdl1.2-dev libsdl1.2debian
