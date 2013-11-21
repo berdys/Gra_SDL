@@ -15,8 +15,13 @@
 #include <Box2D/Box2D.h>
 #include <stdio.h>
 
+void initActor();
+
+Uint8 * keystate;
+
 b2World *world;
 b2Body *body;
+b2Body *actor;
 b2Vec2 points[4];
 Uint32 start;
 
