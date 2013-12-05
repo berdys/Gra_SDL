@@ -302,7 +302,39 @@ void init()
     }
     alBufferData(buffer[5], to_al_format(wave->channels, wave->bitsPerSample),bufferData5, wave->dataSize, wave->sampleRate);
     check_errors("Kopiowanie do bufora");
+    //##################################################################
+    
+    
+    delete wave;
+    wave = WaveOpenFileForReading("/home/marek/Gra_SDL/sounds/znudzenie.wav");
+    if (!wave)
+    {
+        std::cout<< "Nie znaleziono pliku dzwiękowego"<<std::endl;
+        return;
+    }
 
+    ret = WaveSeekFile(0, wave);
+    if (ret)
+    {
+        std::cout<<"Nie moze przeszukac pliku"<<std::endl;
+        return;
+    }
+
+    bufferData6 = malloc(wave->dataSize);
+    if (!bufferData6)
+    {
+        std::cout<<"Problem z alokacją pamięci"<<std::endl;
+        return;
+    }
+
+    ret = WaveReadFile((char*)bufferData5, wave->dataSize, wave);
+    if (ret != wave->dataSize)
+    {
+        std::cout<<"Bufor za krótki chyba"<<std::endl;
+        return;
+    }
+    alBufferData(buffer[6], to_al_format(wave->channels, wave->bitsPerSample),bufferData6, wave->dataSize, wave->sampleRate);
+    check_errors("Kopiowanie do bufora");
 
 
 
