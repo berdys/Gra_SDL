@@ -8,3 +8,12 @@ OpenAL: sudo apt-get install libopenal-dev
 SDL: sudo apt-get install libsdl1.2-dev libsdl1.2debian
 apt-get install libaudio-dev
 
+
+SDL:
+apt-get install libsdl-image1.2-dev
+
+SDL_Fonts:
+libsdl-ttf2.0-dev
+
+SDL_Audio:
+libsdl-mixer1.2-dev
