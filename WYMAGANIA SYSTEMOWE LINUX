@@ -17,3 +17,6 @@ libsdl-ttf2.0-dev
 
 SDL_Audio:
 libsdl-mixer1.2-dev
+
+sudo apt-get install libglu1-mesa-dev mesa-common-dev freeglut3 freeglut3-dev libxi-dev libopenal-dev libsdl1.2-dev libsdl1.2debian
+libaudio-dev libsdl-ttf2.0-dev libsdl-mixer1.2-dev
